@@ -32,14 +32,28 @@ async function sendEmail(message) {
     console.log(process.env.SENDER_EMAIL)
     console.log(process.env.SENDER_PASS)
 
-    let info = await transporter.sendMail({
-        from: process.env.SENDER_EMAIL,
-        to: process.env.RECEIVER_EMAIL,
-        subject: message.subject,
-        text: message.text
-    })
 
-    console.log(info);
+    let text = JSON.stringify(message.text);
+
+    // Transform the message.text into a formatted string
+    let formattedText = text.replace(/,/g, " ") 
+    formattedText = formattedText.replace(/:/g, ": ")
+    formattedText = formattedText.replace(/"/g, "")
+    formattedText = formattedText.replace(/{/g, "")
+    formattedText = formattedText.replace(/}/g, "")
+    formattedText = formattedText.replace(/\\/g, "")
+    
+    try {
+        let info = await transporter.sendMail({
+            from: process.env.SENDER_EMAIL,
+            to: process.env.RECEIVER_EMAIL,
+            subject: message.subject,
+            text: formattedText
+        })
+    } catch (err) {
+        console.log(err)
+        return false;
+    }
 
     return true;
 }
