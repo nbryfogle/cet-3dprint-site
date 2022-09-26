@@ -21,8 +21,8 @@ async function sendEmail(message) {
         port: 465,
         secure: true,
         auth: {
-            user: platform.env.ccti3d.idFromName("SENDER_EMAIL"),
-            pass: platform.env.ccti3d.idFromName("SENDER_PASS")
+            user: platform.env.SENDER_EMAIL,
+            pass: platform.env.SENDER_PASS
         }
     })
 
@@ -38,8 +38,8 @@ async function sendEmail(message) {
     
     try {
         let info = await transporter.sendMail({
-            from: platform.env.ccti3d.idFromName("SENDER_EMAIL"),
-            to: platform.env.ccti3d.idFromName("RECEIVER_EMAIL"),
+            from: platform.env.SENDER_EMAIL,
+            to: platform.env.RECEIVER_EMAIL,
             subject: message.subject,
             text: formattedText
         })
