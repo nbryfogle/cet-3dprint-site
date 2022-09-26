@@ -1,8 +1,8 @@
 import nodemailer from 'nodemailer';
 import { json } from '@sveltejs/kit';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
@@ -21,8 +21,8 @@ async function sendEmail(message) {
         port: 465,
         secure: true,
         auth: {
-            user: process.env.SENDER_EMAIL,
-            pass: process.env.SENDER_PASS
+            user: platform.env.ccti3d.idFromName("SENDER_EMAIL"),
+            pass: platform.env.ccti3d.idFromName("SENDER_PASS")
         }
     })
 
@@ -38,8 +38,8 @@ async function sendEmail(message) {
     
     try {
         let info = await transporter.sendMail({
-            from: process.env.SENDER_EMAIL,
-            to: process.env.RECEIVER_EMAIL,
+            from: platform.env.ccti3d.idFromName("SENDER_EMAIL"),
+            to: platform.env.ccti3d.idFromName("RECEIVER_EMAIL"),
             subject: message.subject,
             text: formattedText
         })
