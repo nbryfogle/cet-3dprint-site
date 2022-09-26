@@ -62,8 +62,6 @@
             text: info,
         };
 
-        console.log(message);
-
         for (let item in info) {
             console.log(item);
             if (!info[item]) {
@@ -81,10 +79,12 @@
         });
 
         if (resp.ok){
-            successbar = true;
+            submitbar = true;
         } else {
             errorbar = true;
         }
+
+        console.log(resp.ok);
 
     }
 

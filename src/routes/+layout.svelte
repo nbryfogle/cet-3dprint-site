@@ -5,7 +5,7 @@
 </script>
 
 <MaterialApp theme="dark">
-<AppBar>
+<AppBar class="pa-1">
     <div slot="icon">
         <Button on:click={() => goto("/")}>
             <Icon path={mdiHome} />

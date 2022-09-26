@@ -4,8 +4,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-console.log(process.env);
-
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
   const data = await request.json();
@@ -17,8 +15,7 @@ export async function POST({ request }) {
 }
 
 async function sendEmail(message) {
-    console.log("Sending email...")
-    console.log(message);
+    
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
@@ -29,14 +26,10 @@ async function sendEmail(message) {
         }
     })
 
-    console.log(process.env.SENDER_EMAIL)
-    console.log(process.env.SENDER_PASS)
-
-
     let text = JSON.stringify(message.text);
 
     // Transform the message.text into a formatted string
-    let formattedText = text.replace(/,/g, " ") 
+    let formattedText = text.replace(/,/g, "\n") 
     formattedText = formattedText.replace(/:/g, ": ")
     formattedText = formattedText.replace(/"/g, "")
     formattedText = formattedText.replace(/{/g, "")
