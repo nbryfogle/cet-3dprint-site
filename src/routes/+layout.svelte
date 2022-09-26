@@ -16,9 +16,9 @@
     <Button class="mr-3" on:click={() => goto("/order")}>
         <Icon path={mdiCart} />
     </Button>
-    <Button class="mr-3" on:click={() => goto("/news")}>
+    <!-- <Button class="mr-3" on:click={() => goto("/news")}>
         <Icon path={mdiNewspaper} />
-    </Button>
+    </Button> -->
 </AppBar>
 <slot></slot>
 </MaterialApp>
